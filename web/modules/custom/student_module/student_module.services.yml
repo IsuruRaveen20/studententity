@@ -1,0 +1,8 @@
+services:
+  student_module.controller:
+    class: Drupal\student_module\Controller\StudentController
+    arguments:
+      - '@entity_type.manager'
+      - '@form_builder'
+    tags:
+      - { name: 'controller.service_arguments' }

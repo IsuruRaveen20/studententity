@@ -13,12 +13,5 @@ student_module.add_form:
     _title: 'Add Student'
   requirements:
     _permission: 'administer student'
-
-# entity.student.add_form:
-#   path: '/content/student/add'
-#   defaults:
-#     # Calls the form.add controller, defined in the Student entity.
-#     _entity_form: student_module.add
-#     _title: 'Add Student'
-#   requirements:
-#     #_entity_create_access: 'content_entity_example_contact'
+    #_custom_access_check: 'Drupal\student_module\Access\StudentAccessCheck::access'
+    #_access_check_route: 'student_module.access_check'
