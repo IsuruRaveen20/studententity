@@ -1,0 +1,24 @@
+entity.student.settings:
+  path: 'admin/structure/student'
+  defaults:
+    _form: '\Drupal\student_module\Form\StudentSettingsForm'
+    _title: 'Student'
+  requirements:
+    _permission: 'administer student'
+
+student_module.add_form:
+  path: '/content/student/add'
+  defaults:
+    _controller: '\Drupal\student_module\Controller\StudentController::addForm'
+    _title: 'Add Student'
+  requirements:
+    _permission: 'administer student'
+
+# entity.student.add_form:
+#   path: '/content/student/add'
+#   defaults:
+#     # Calls the form.add controller, defined in the Student entity.
+#     _entity_form: student_module.add
+#     _title: 'Add Student'
+#   requirements:
+#     #_entity_create_access: 'content_entity_example_contact'

@@ -1,0 +1,8 @@
+name: 'Student Module'
+type: module
+description: 'Custom module for Student entity'
+core_version_requirement: ^9 || ^10
+package: 'Custom'
+dependencies:
+  - drupal:options
+  - drupal:user
