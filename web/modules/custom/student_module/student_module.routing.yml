@@ -4,7 +4,7 @@ entity.student.settings:
     _form: '\Drupal\student_module\Form\StudentSettingsForm'
     _title: 'Student'
   requirements:
-    _permission: 'administer student'
+    _permission: 'student access'
 
 student_module.add_form:
   path: '/content/student/add'
@@ -12,6 +12,16 @@ student_module.add_form:
     _controller: '\Drupal\student_module\Controller\StudentController::addForm'
     _title: 'Add Student'
   requirements:
-    _permission: 'administer student'
-    #_custom_access_check: 'Drupal\student_module\Access\StudentAccessCheck::access'
-    #_access_check_route: 'student_module.access_check'
+    _custom_access: '\Drupal\student_module\Controller\StudentController::checkContentAccess'
+
+
+
+
+
+
+
+
+
+
+
+

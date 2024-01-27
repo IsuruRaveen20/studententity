@@ -6,5 +6,5 @@ entity.student.edit_form:
 entity.student.delete_form:
   route_name: entity.student.delete_form
   group: student
-  title: Deletee
+  title: Delete
   weight: 10

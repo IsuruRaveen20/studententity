@@ -8,38 +8,42 @@ use Drupal\Core\Form\FormBuilderInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\user\Entity\User;
+use Drupal\Core\Access\AccessResult;
 
 /**
  * Controller for the Student entity.
  */
-class StudentController extends ControllerBase {
+class StudentController extends ControllerBase
+{
   /**
-     * The entity type manager.
-     *
-     * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-     */
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
   protected $entityTypeManager;
 
   /**
-     * Constructs a StudentController object.
-     *
-     * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
-     *   The entity type manager.
-     */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, FormBuilderInterface $formBuilder) {
+   * Constructs a StudentController object.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager.
+   */
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, FormBuilderInterface $formBuilder)
+  {
     $this->entityTypeManager = $entityTypeManager;
     $this->formBuilder = $formBuilder;
   }
 
 
-   /**
-     * {@inheritdoc}
-     */
-    public static function create(ContainerInterface $container) {
-      return new static(
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container)
+  {
+    return new static(
       $container->get('entity_type.manager'),
       $container->get('form_builder')
-      );
+    );
   }
 
   /**
@@ -51,7 +55,8 @@ class StudentController extends ControllerBase {
    * @return array
    *   Render array for the student entity form.
    */
-  public function content(RouteMatchInterface $route_match) {
+  public function content(RouteMatchInterface $route_match)
+  {
     // Get the current user.
     // $current_user = User::load($this->currentUser()->id());
     $current_user = $this->currentUser()->id();
@@ -91,9 +96,32 @@ class StudentController extends ControllerBase {
   }
 
   // Use the content method for the add form as well
-  public function addForm(RouteMatchInterface $route_match) {
+  public function addForm(RouteMatchInterface $route_match)
+  {
     return $this->content($route_match);
   }
+
+  /**
+   * Custom access callback for the 'student_module.add_form' route.
+   *
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
+   */
+  public static function checkContentAccess()
+  {
+    // Check if the user has the 'student' role.
+    $hasStudentRole = in_array('student', \Drupal::currentUser()->getRoles());
+    // Check if the user has the necessary permission.
+    $hasPermission = \Drupal::currentUser()->hasPermission('student access');
+    var_dump($hasStudentRole);
+    var_dump($hasPermission);
+
+    // Combine the role and permission checks.
+    return AccessResult::allowedIf($hasStudentRole && $hasPermission)->cachePerPermissions();
+  }
+
+
+
 
 }
 

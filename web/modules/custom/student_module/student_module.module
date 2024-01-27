@@ -69,3 +69,16 @@ function student_module_user_predelete(UserInterface $account) {
   $students = $storage->loadMultiple($student_ids);
   $storage->delete($students);
 }
+
+
+/**
+ * Implements hook_permission().
+ */
+function student_permission() {
+  return array(
+    'student access' => array(
+      'title' => t('student access'),
+      'description' => t('Allows users to create a Student entity.'),
+    ),
+  );
+}

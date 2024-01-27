@@ -3,6 +3,7 @@ entity.student.settings:
   description: 'Configure a Student entity type.'
   route_name:  entity.student.settings
   parent: system.admin_structure
+  
 entity.student.collection:
   title: 'Students'
   description: 'List of students.'
